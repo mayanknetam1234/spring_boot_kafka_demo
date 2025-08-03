@@ -1,5 +1,6 @@
 package com.mayank.kafkaFirst.services.producers.imp;
 
+import com.mayank.kafkaFirst.payloads.Student;
 import com.mayank.kafkaFirst.services.producers.KafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,8 +12,14 @@ import static java.lang.String.format;
 @Slf4j
 public class KafkaConsumerImpl implements KafkaConsumer {
     @Override
-    @KafkaListener(topics = "Test",groupId = "myGroup")
+//    @KafkaListener(topics = "Test",groupId = "myGroup")
     public void TestTopicConsumer(String msg) {
-        log.info("Consuming a new msg from topic Test, msg:{}", msg);
+        log.info("Consuming a new msg  from topic Test, msg:{}", msg);
+    }
+
+    @Override
+    @KafkaListener(topics = "TestJson",groupId = "myGroup")
+    public void TestJsonTopicConsumer(Student student) {
+        log.info("Consuming a new msg from topic TestJson, msg:{}", student.toString());
     }
 }
